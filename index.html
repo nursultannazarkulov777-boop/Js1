@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Код для новичка: схема по шагам</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>Код — это просто</h1>
+    <p>Схема с доски, разобранная по шагам: от старта программы до вывода информации.</p>
+  </header>
+
+  <main>
+    <ol class="flow" aria-label="Схема">
+      <li><a href="#start">Start</a></li>
+      <li><a href="#router">Router <span class="chips"><b>v1</b><b>v2</b><b>v3</b></span></a></li>
+      <li><a href="#vars">const / let / var <span class="both">↔</span> Number / String …</a></li>
+      <li><a href="#info">Info</a></li>
+    </ol>
+
+    <figure class="photo">
+      <img src="photo.jpg" alt="Схема на доске: Start, Router с версиями v1, v2, v3, const let var, Number String и Info">
+      <figcaption>Так эта схема выглядела на доске.</figcaption>
+    </figure>
+
+    <section id="start">
+      <h2>Start: с чего всё начинается</h2>
+      <p>Программа запускается и ждёт запросы. Например, кто-то открывает адрес в браузере. Дальше запрос попадает к маршрутизатору.</p>
+    </section>
+
+    <section id="router">
+      <h2>Router: куда отправить запрос</h2>
+      <p>Router смотрит на адрес и решает, какой код запустить. Так же, как указатель на вокзале: «на этот путь — туда».</p>
+      <p>Версии <code>v1</code>, <code>v2</code>, <code>v3</code> — это разные варианты одного сервиса. Старые приложения работают через <code>v1</code>, новые — через <code>v3</code>, и ничего не ломается.</p>
+      <pre><code>app.use("/v1", routerV1);
+app.use("/v2", routerV2);
+app.use("/v3", routerV3);</code></pre>
+    </section>
+
+    <section id="vars">
+      <h2>Переменные и типы</h2>
+      <p>Переменная — коробка с именем. Тип — что лежит внутри. Они связаны: у каждой переменной есть значение, а у значения есть тип.</p>
+      <dl>
+        <dt><code>const</code></dt><dd>Значение нельзя заменить. Бери по умолчанию.</dd>
+        <dt><code>let</code></dt><dd>Значение можно менять позже.</dd>
+        <dt><code>var</code></dt><dd>Старый способ. В новом коде не нужен.</dd>
+        <dt><code>Number</code></dt><dd>Числа: <code>7</code>, <code>3.14</code>.</dd>
+        <dt><code>String</code></dt><dd>Текст в кавычках: <code>"привет"</code>.</dd>
+        <dt>…</dt><dd>Есть и другие типы: <code>Boolean</code> (да/нет), <code>Array</code> (список), <code>Object</code>.</dd>
+      </dl>
+      <pre><code>const user = "Аня";   // String
+let score = 0;        // Number
+score = score + 1;</code></pre>
+    </section>
+
+    <section id="info">
+      <h2>Info: смотрим, что получилось</h2>
+      <p>И переменные, и типы ведут к одному — к информации, которую можно вывести командой <code>console.log()</code>. Введи значение и узнай его тип.</p>
+      <div class="try">
+        <label for="val">Значение</label>
+        <input id="val" type="text" value="42" autocomplete="off">
+        <button id="go" type="button">Проверить тип</button>
+        <p id="out" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>Следующий шаг: открой консоль браузера (F12) и напиши свою первую переменную.</footer>
+
+  <script>
+    const input = document.getElementById("val");
+    const out = document.getElementById("out");
+    document.getElementById("go").addEventListener("click", () => {
+      const text = input.value.trim();
+      const isNum = text !== "" && !isNaN(Number(text));
+      out.textContent = isNum
+        ? "Number: " + Number(text) + ". В кавычках это был бы String."
+        : "String: \"" + text + "\"";
+    });
+  </script>
+</body>
+</html>
